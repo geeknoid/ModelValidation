@@ -87,9 +87,10 @@ public sealed class LengthAttribute : Attribute
 /// </summary>
 public sealed class StringAttribute : Attribute
 {
-    public bool DisallowEmpty { get; set; } = true;
-    public bool DisallowOnlyWhitespace { get; set; } = true;
-    public bool DisallowAnyWhitespace { get; set; } = false;
+    public bool InvalidIfEmpty { get; set; } = true;
+    public bool InvalidIfOnlyWhitespace { get; set; } = true;
+    public bool InvalidIfStartsOrEndsWithWhitespace { get; set; } = true;
+    public bool InvalidIfAnyWhitespace { get; set; } = false;
     public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
     public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
 }
