@@ -2,30 +2,36 @@
 
 This project outlines a simple design for effective model validation, aided by a source generator. It's main characteristics include:
 
-* Simple to use with clear semantics
+* Simple to use with clear semantics.
 
-* Simple to introduce new constraint annotations
+* Simple to introduce new constraint annotations.
 
-* High-quality diagnostics
+* High-quality diagnostics.
 
-* Localization-friendly
+* Localization-friendly.
 
 * Efficient as there are no allocations incurred when validation doesn't encounter errors.
 
 * AOT-friendly, no reflection involved.
 
+* Integration with DI for automatic validation of incoming options.
+
 ## How it works
 
 * Developer creates a model
 
-* Developer constrains the allowed value of individual fields/properties of the model using attributes
+* Developer constrains the allowed value of individual fields/properties of the model using attributes.
 
-* Developer annotates the type with the [MakeValidatable] attribute
+* Developer annotates the type with the [MakeValidatable] attribute.
 
 * The code generator emits the implementation of the IValidatable interface for the model, which verifies
 the constraints declared by the developer and returns a detailed diagnostic if there are problems.
 
 * Developer calls the generated Validate method on the model and inspects the results.
+
+* The generated validator can be leveraged by dependency injection to ensure that options delivered through DI are
+automatically validated before being delivered through DI, and that appropriate high-quality diagnostics
+are delivered to the developer that's trying to load options into DI, either through code or through config.
 
 ## Gaps
 
