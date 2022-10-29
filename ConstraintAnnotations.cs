@@ -71,7 +71,7 @@ public sealed class TimeSpanRangeAttribute : Attribute
 }
 
 /// <summary>
-/// Ensures a string, span, array, or collection have a count of values in range.
+/// Ensures a string, span, array, or collection has a count of values in range.
 /// </summary>
 public sealed class LengthAttribute : Attribute
 {
@@ -87,10 +87,11 @@ public sealed class LengthAttribute : Attribute
 /// </summary>
 public sealed class StringAttribute : Attribute
 {
-    public bool CanBeEmpty { get; set; }
-    public bool CanBeOnlyWhitespace { get; set; }
-    public bool CanContainWhitespace { get; set; }
+    public bool DisallowEmpty { get; set; } = true;
+    public bool DisallowOnlyWhitespace { get; set; } = true;
+    public bool DisallowAnyWhitespace { get; set; } = false;
     public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
 }
 
 /// <summary>
