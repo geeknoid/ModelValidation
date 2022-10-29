@@ -112,3 +112,21 @@ public sealed class JsonAttribute : Attribute
     public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
     public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
 }
+
+/// <summary>
+/// Ensures that a field or property contains one of the listed values.
+/// </summary>
+public sealed class AllowedValuesAttribute : Attribute
+{
+    public AllowedValuesAttribute(params object[] allowed) { throw new NotImplementedException(); }
+    public bool Validate(object value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+}
+
+/// <summary>
+/// Ensures that a field or property does not contain one of the listed values.
+/// </summary>
+public sealed class DisallowedValuesAttribute : Attribute
+{
+    public DisallowedValuesAttribute(params object[] disallowed) { throw new NotImplementedException(); }
+    public bool Validate(object value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+}
