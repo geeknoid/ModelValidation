@@ -24,7 +24,6 @@ partial class MyModel
 }
 
 // a component of the bigger model
-[MakeValidatable]
 class MySubmodel
 {
     [ScalarRange(100)]

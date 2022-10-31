@@ -30,18 +30,15 @@ the constraints declared by the developer and returns a detailed diagnostic if t
 * Developer calls the generated Validate method on the model and inspects the results.
 
 * The generated validator can be leveraged by dependency injection to ensure that options delivered through DI are
-automatically validated before being delivered through DI, and that appropriate high-quality diagnostics
-are delivered to the developer that's trying to load options into DI, either through code or through config.
+automatically validated before use, and that appropriate high-quality diagnostics
+are produced for the developer that's trying to load options into DI.
 
 ## Gaps
 
 Features likely needed but not shown in this sketch:
 
-* The ability to validate models defined in other assemblies. This kind of 'foreign' validation
-can easily be achieved via a few more annotations and can compose naturally.
-
-* Integrating hand-written validation with the code generated ones. This is desirable to enable
-developers to write more sophisticated constraints (such as those involving multiple field/properties).
+* Integrating hand-written validation logic with the code generated ones. This is desirable to enable
+developers to write more sophisticated constraints such as those involving multiple field/properties.
 
 ## Example
 
