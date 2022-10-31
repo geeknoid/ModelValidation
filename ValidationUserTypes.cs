@@ -23,7 +23,7 @@ public record ValidationError(IReadOnlyList<string> Path, string Member, string 
 public struct ValidationResult
 {
     public void RecordError(string mamber, string message) { throw new NotImplementedException(); }
-    public void RecordContext(string member, ValidationResult? context) { throw new NotImplementedException(); }
+    public void RecordErrors(string member, ValidationResult result) { throw new NotImplementedException(); }
     public IReadOnlyList<ValidationError> Errors { get; }
 }
 

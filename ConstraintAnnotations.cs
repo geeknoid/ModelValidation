@@ -2,11 +2,13 @@
 //
 // Each attribute implements one or more methods with the following signature:
 //
-//    bool Validate(XXX value, out string? message)
+//    string? Validate(XXX value)
 //
 // The type of the value parameter determines the type of the properties/fields the attribute can be applied
 // to. So if an attribute has a Validate function accepting a string, then the attribute can only be
 // applied to string properties/fields. The code generator generates warnings about misuses.
+//
+// If the method returns null, validation was successful, otherwise the string represents the error message.
 
 #pragma warning disable IDE0060
 
@@ -23,7 +25,7 @@ public sealed class RegexAttribute : Attribute
 {
     public RegexAttribute(string regex) {}
     public RegexAttribute(string regex, RegexOptions options) { }
-    public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(string value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -31,8 +33,8 @@ public sealed class RegexAttribute : Attribute
 /// </summary>
 public sealed class NotNullAttribute : Attribute
 {
-    public bool Validate<T>(T value, [NotNullWhen(true)] out string? message) where T : class { throw new NotImplementedException(); }
-    public bool Validate<T>(Nullable<T> value, [NotNullWhen(true)] out string? message) where T : struct { throw new NotImplementedException(); }
+    public string? Validate<T>(T value) { throw new NotImplementedException(); }
+    public string? Validate<T>(Nullable<T> value) where T : struct { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -43,7 +45,7 @@ public sealed class ScalarRangeAttribute : Attribute
     public ScalarRangeAttribute(long max) { }
     public ScalarRangeAttribute(long min, long max) { }
     public bool Exclusive { get; set; }
-    public bool Validate(long value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(long value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -54,7 +56,7 @@ public sealed class DoubleRangeAttribute : Attribute
     public DoubleRangeAttribute(double max) { }
     public DoubleRangeAttribute(double min, double max) { }
     public bool Exclusive { get; set; }
-    public bool Validate(double value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(double value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -67,7 +69,7 @@ public sealed class TimeSpanRangeAttribute : Attribute
     public TimeSpanRangeAttribute(int maxMs) { }
     public TimeSpanRangeAttribute(int minMs, int maxMs) { }
     public bool Exclusive { get; set; }
-    public bool Validate(TimeSpan value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(TimeSpan value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -77,9 +79,9 @@ public sealed class LengthAttribute : Attribute
 {
     public LengthAttribute(int max) { }
     public LengthAttribute(int min, int max) { }
-    public bool Validate<T>(IEnumerable<T> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
-    public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
-    public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate<T>(IEnumerable<T> value) { throw new NotImplementedException(); }
+    public string? Validate(string value) { throw new NotImplementedException(); }
+    public string? Validate(ReadOnlySpan<char> value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -91,8 +93,8 @@ public sealed class StringAttribute : Attribute
     public bool InvalidIfOnlyWhitespace { get; set; } = true;
     public bool InvalidIfStartsOrEndsWithWhitespace { get; set; } = true;
     public bool InvalidIfAnyWhitespace { get; set; } = false;
-    public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
-    public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(string value) { throw new NotImplementedException(); }
+    public string? Validate(ReadOnlySpan<char> value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -100,8 +102,8 @@ public sealed class StringAttribute : Attribute
 /// </summary>
 public sealed class Base64Attribute : Attribute
 {
-    public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
-    public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(string value) { throw new NotImplementedException(); }
+    public string? Validate(ReadOnlySpan<char> value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -109,8 +111,8 @@ public sealed class Base64Attribute : Attribute
 /// </summary>
 public sealed class JsonAttribute : Attribute
 {
-    public bool Validate(string value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
-    public bool Validate(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(string value) { throw new NotImplementedException(); }
+    public string? Validate(ReadOnlySpan<char> value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -119,7 +121,7 @@ public sealed class JsonAttribute : Attribute
 public sealed class AllowedValuesAttribute : Attribute
 {
     public AllowedValuesAttribute(params object[] allowed) { throw new NotImplementedException(); }
-    public bool Validate(object value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(object value) { throw new NotImplementedException(); }
 }
 
 /// <summary>
@@ -128,5 +130,5 @@ public sealed class AllowedValuesAttribute : Attribute
 public sealed class DisallowedValuesAttribute : Attribute
 {
     public DisallowedValuesAttribute(params object[] disallowed) { throw new NotImplementedException(); }
-    public bool Validate(object value, [NotNullWhen(true)] out string? message) { throw new NotImplementedException(); }
+    public string? Validate(object value) { throw new NotImplementedException(); }
 }
